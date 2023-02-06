@@ -1,7 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const App = () => {
-
     const ubicaciones = [
         'src/images/foco_apagado.webp',
         'src/images/foco_prendido.webp',
@@ -12,10 +11,18 @@ export const App = () => {
     ]
 
     const [estaPrendido, setEstaPrendido] = useState(false)
+    const [clicks, setClicks] = useState(0)
 
+    const onClick = () => {
+        setEstaPrendido(!estaPrendido)
+        setClicks(clicks + 1)
+    }
 
-    const onClick = () => setEstaPrendido(!estaPrendido)
+    const mostrarMensaje = () => `Usted ha hecho ${clicks} en esta aplicación`
 
+    useEffect(() => {
+        console.log(mostrarMensaje())
+    }, [clicks])
 
     return (
         <div className="container">
